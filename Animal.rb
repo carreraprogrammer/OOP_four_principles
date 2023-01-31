@@ -10,9 +10,13 @@ class Animal
         @type = type
       end
   
-    def speak
-      "Bla bla bla"
-    end
+      def speak
+        if @type == "dog"
+          "Woof, woof"
+        elsif @type == "spider"
+          "..."
+        end
+      end
 
   end
 
@@ -26,3 +30,9 @@ class Animal
   p animal_2.name
   p animal_2.name = "Fluffy"
   p animal_2.name
+
+animal_1 = Animal.new("dog", 4, "Rex")
+animal_2 = Animal.new("spider", 8, "Wilma")
+
+p animal_1.speak()
+p animal_2.speak()
