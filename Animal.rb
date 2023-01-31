@@ -11,11 +11,7 @@ class Animal
       end
   
       def speak
-        if @type == "dog"
-          "Woof, woof"
-        elsif @type == "spider"
-          "..."
-        end
+        "grrrr"
       end
 
       def bring_a_stick
