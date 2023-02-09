@@ -1,4 +1,5 @@
 require "./remover.rb"
+require "./owner.rb"
 
 class Animal
 
@@ -43,7 +44,7 @@ class Animal
   require "./dog.rb"
   require "./spider.rb"
 
-  animal = Animal.new("lion", 4, "Rex")  
+  animal = Animal.new("lion", 4, "Pedro")  
   dog = Dog.new("black", "Rex")
   spider = Spider.new(85, "Wilma")
 
@@ -97,4 +98,27 @@ class Animal
   # => false
 
   p  spider.likes_food?("bug")
-  # => true
+  # => true}
+
+  alex = Owner.new("Alex")
+
+  puts alex.animals
+  alex.add_animal(dog)
+  puts alex.animals
+  # => #<Dog:0x00000224ff5033b0>
+  alex.add_animal(spider)
+  puts alex.animals
+  #<Dog:0x000001f5c66f7c10>
+  #<Spider:0x000001f5c66f7968>
+  alex.add_animal(animal)
+  puts alex.animals.map {|animal| animal.name}
+  #Rex
+  #Wilma
+  #Pedro
+  
+  p alex.animals.count
+  # 3
+  p alex.animals.first.name
+  # "Rex"
+  p alex.animals.first.number_of_legs
+  # 2
