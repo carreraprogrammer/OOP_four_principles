@@ -9,7 +9,8 @@ class Animal
         @id = Random.rand(1..1000)
         @name = name
         @number_of_legs = number_of_legs
-        @type = type
+        @type = 
+        @liked_food = NoFood.new()
       end
   
       def speak
@@ -32,7 +33,10 @@ class Animal
         remover = Remover.new()
         @number_of_legs = remover.decrease(@number_of_legs)
       end
-    
+     
+      def likes_food?(food)
+        @liked_food.is_liked?(food)
+      end
 
   end
 
@@ -76,3 +80,21 @@ class Animal
   # => 2
   p spider.remove_leg()
   # => 2
+
+  p animal.likes_food?("meat")
+  #=> false
+
+  p dog.likes_food?("meat")
+  # => true
+
+  p spider.likes_food?("meat")
+  # => false
+
+  p spider.likes_food?("meat")
+  # => false
+
+  p  dog.likes_food?("bug")
+  # => false
+
+  p  spider.likes_food?("bug")
+  # => true
