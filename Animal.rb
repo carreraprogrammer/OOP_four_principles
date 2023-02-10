@@ -39,6 +39,11 @@ class Animal
         @liked_food.is_liked?(food)
       end
 
+      def owner=(owner)
+        @owner = owner
+        owner.animals.push(self) unless owner.animals.include?(self)
+      end
+
   end
 
   require "./dog.rb"
@@ -106,27 +111,40 @@ class Animal
   alex.add_animal(dog)
   puts alex.animals
   # => #<Dog:0x00000224ff5033b0>
-  alex.add_animal(spider)
+  p dog.owner
+  # => #<Owner:0x00000129e0aeb400 @name="Alex", @animals=[#<Dog:0x00000129e0af3a60 @id=177, @name="Rex", @number_of_legs=2, @liked_food=#<DogFood:0x00000129e0af3880>, @type=#<NoFood:0x00000129e0af3920>, @color="black", @owner=#<Owner:0x00000129e0aeb400 ...>>]>
+  puts dog.owner.name
+  # => Alex
   puts alex.animals
-  #<Dog:0x000001f5c66f7c10>
-  #<Spider:0x000001f5c66f7968>
-  alex.add_animal(animal)
-  puts alex.animals.map {|animal| animal.name}
-  #Rex
-  #Wilma
-  #Pedro
+  # => #<Dog:0x00000129e0af3a60>
+
+  p   spider.owner
+  p alex.add_animal(spider)
+  p spider.owner
+  p spider.owner.name
+  p alex.animals
+  
+  p animal.owner
+  p alex.add_animal(animal)
+  p animal.owner
+  p animal.owner.name
+  
   
   p alex.animals.count
-  # 3
   p alex.animals.first.name
-  # "Rex"
   p alex.animals.first.number_of_legs
-  # 2
 
-  p animal.owner
-  #=> nil
-  puts animal.owner = alex
-  puts animal.owner.name
-  # => Alex
-  puts alex.animals.last.owner.name
-  # => Alex
+
+
+  p second_animal = Animal.new("cat", 4, "Kitty")
+  p second_animal.owner
+  p alex.animals.count
+  
+  p second_animal.owner = alex
+  
+  p second_animal.owner
+  p alex.animals.count
+  p alex.animals.last
+  p alex.animals.last.name
+  
+
